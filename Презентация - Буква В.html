@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учимся писать букву В</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .presentation-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 1200px;
+            width: 100%;
+            padding: 40px;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .letter-display {
+            font-size: 15em;
+            text-align: center;
+            color: #667eea;
+            font-weight: bold;
+            margin: 40px 0;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+            font-family: 'Times New Roman', serif;
+        }
+
+        .letter-small {
+            font-size: 8em;
+            text-align: center;
+            color: #764ba2;
+            font-weight: bold;
+            margin: 40px 0;
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.2);
+            font-family: 'Times New Roman', serif;
+        }
+
+        .letter-animation {
+            animation: drawLetter 2s ease-in-out infinite;
+        }
+
+        @keyframes drawLetter {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .elements {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .element {
+            background: #f0f0f0;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.5em;
+            border: 3px solid #667eea;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .word-list {
+            list-style: none;
+            font-size: 2em;
+            text-align: center;
+            line-height: 2;
+        }
+
+        .word-list li {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            transition: transform 0.3s;
+        }
+
+        .word-list li:hover {
+            transform: scale(1.05);
+            background: #e0e0e0;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex: 1;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .writing-guide {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px dashed #667eea;
+        }
+
+        .writing-guide ol {
+            font-size: 1.5em;
+            line-height: 2;
+            margin-left: 30px;
+        }
+
+        .writing-guide li {
+            margin: 10px 0;
+        }
+
+        .game-area {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .game-card {
+            background: #f0f0f0;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 2.5em;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .game-card:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
+            background: #e0e0e0;
+        }
+
+        .game-card.selected {
+            background: #667eea;
+            color: white;
+            border-color: #764ba2;
+        }
+
+        .emoji {
+            font-size: 3em;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .reflection-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .reflection-button {
+            font-size: 4em;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 20px;
+            border-radius: 15px;
+            background: white;
+        }
+
+        .reflection-button:hover {
+            transform: scale(1.2);
+        }
+
+        .connections {
+            font-size: 3em;
+            text-align: center;
+            line-height: 2;
+            margin: 30px 0;
+        }
+
+        .connections span {
+            display: inline-block;
+            margin: 0 20px;
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-number">
+            <span id="current-slide">1</span> / <span id="total-slides">10</span>
+        </div>
+
+        <!-- Слайд 1: Титульный -->
+        <div class="slide active">
+            <h1>Учимся писать</h1>
+            <div class="letter-display letter-animation">В</div>
+            <h2>Добро пожаловать на урок!</h2>
+        </div>
+
+        <!-- Слайд 2: Заглавная буква В -->
+        <div class="slide">
+            <h2>Заглавная буква В</h2>
+            <div class="letter-display">В</div>
+            <div class="elements">
+                <div class="element">Прямая палочка</div>
+                <div class="element">Два полукруга</div>
+            </div>
+            <p style="text-align: center; font-size: 1.5em; margin-top: 30px; color: #666;">
+                Буква В похожа на домик с двумя окнами
+            </p>
+        </div>
+
+        <!-- Слайд 3: Как писать заглавную В -->
+        <div class="slide">
+            <h2>Как писать заглавную букву В</h2>
+            <div class="writing-guide">
+                <ol>
+                    <li>Ставим ручку чуть ниже верхней линии</li>
+                    <li>Ведём прямую линию сверху вниз</li>
+                    <li>От верхней точки ведём первый полукруг</li>
+                    <li>От середины ведём второй полукруг</li>
+                    <li>Заканчиваем на нижней линии</li>
+                </ol>
+            </div>
+            <div class="letter-display" style="font-size: 10em; margin-top: 20px;">В</div>
+        </div>
+
+        <!-- Слайд 4: Строчная буква в -->
+        <div class="slide">
+            <h2>Строчная буква в</h2>
+            <div class="letter-small">в</div>
+            <p style="text-align: center; font-size: 1.5em; margin-top: 30px; color: #666;">
+                Строчная буква в похожа на заглавную, но меньше
+            </p>
+        </div>
+
+        <!-- Слайд 5: Соединения -->
+        <div class="slide">
+            <h2>Соединения буквы В</h2>
+            <div class="connections">
+                <span>Ва</span>
+                <span>ва</span>
+                <span>Во</span>
+                <span>во</span>
+                <span>Ву</span>
+                <span>ву</span>
+            </div>
+            <p style="text-align: center; font-size: 1.5em; margin-top: 30px; color: #666;">
+                Буква В соединяется с другими буквами
+            </p>
+        </div>
+
+        <!-- Слайд 6: Слова с буквой В -->
+        <div class="slide">
+            <h2>Слова с буквой В</h2>
+            <ul class="word-list">
+                <li>Вася</li>
+                <li>Вова</li>
+                <li>Вера</li>
+                <li>Ветер</li>
+                <li>Ворона</li>
+                <li>Волк</li>
+            </ul>
+        </div>
+
+        <!-- Слайд 7: Игра "Найди букву В" -->
+        <div class="slide">
+            <h2>Игра: Найди букву В</h2>
+            <p style="text-align: center; font-size: 1.5em; margin-bottom: 30px;">
+                Нажмите на слова, в которых есть буква В
+            </p>
+            <div class="game-area">
+                <div class="game-card" onclick="selectCard(this)">ВОРОНА</div>
+                <div class="game-card" onclick="selectCard(this)">КОТ</div>
+                <div class="game-card" onclick="selectCard(this)">ВАЗА</div>
+                <div class="game-card" onclick="selectCard(this)">ДОМ</div>
+            </div>
+        </div>
+
+        <!-- Слайд 8: Физкультминутка -->
+        <div class="slide">
+            <h2>Физкультминутка</h2>
+            <div class="emoji">🤸</div>
+            <p style="text-align: center; font-size: 1.8em; line-height: 1.8; margin: 30px 0;">
+                Встали дружно, потянулись,<br>
+                Букву В мы нарисовали.<br>
+                Руки вверх — это палочка,<br>
+                Руки в стороны — полукруг!
+            </p>
+        </div>
+
+        <!-- Слайд 9: Что мы узнали -->
+        <div class="slide">
+            <h2>Что мы узнали сегодня?</h2>
+            <ul class="word-list" style="font-size: 1.5em;">
+                <li>✓ Научились писать букву В, в</li>
+                <li>✓ Узнали элементы буквы В</li>
+                <li>✓ Потренировались в соединениях</li>
+                <li>✓ Выучили слова с буквой В</li>
+            </ul>
+        </div>
+
+        <!-- Слайд 10: Рефлексия -->
+        <div class="slide">
+            <h2>Как прошёл урок?</h2>
+            <p style="text-align: center; font-size: 1.5em; margin-bottom: 30px;">
+                Выберите смайлик, который показывает ваше настроение
+            </p>
+            <div class="reflection-buttons">
+                <div class="reflection-button" onclick="selectReflection(this)">😊</div>
+                <div class="reflection-button" onclick="selectReflection(this)">😐</div>
+                <div class="reflection-button" onclick="selectReflection(this)">😔</div>
+            </div>
+            <p style="text-align: center; font-size: 1.2em; margin-top: 30px; color: #666;">
+                Спасибо за работу!
+            </p>
+        </div>
+
+        <!-- Кнопки управления -->
+        <div class="controls">
+            <button onclick="previousSlide()">← Назад</button>
+            <button onclick="nextSlide()">Вперёд →</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function selectCard(card) {
+            const word = card.textContent;
+            if (word.includes('В') || word.includes('в')) {
+                card.classList.add('selected');
+                setTimeout(() => {
+                    alert('Правильно! В слове "' + word + '" есть буква В!');
+                }, 100);
+            } else {
+                card.style.background = '#ffcccc';
+                setTimeout(() => {
+                    card.style.background = '#f0f0f0';
+                }, 500);
+            }
+        }
+
+        function selectReflection(button) {
+            document.querySelectorAll('.reflection-button').forEach(btn => {
+                btn.style.transform = 'scale(1)';
+            });
+            button.style.transform = 'scale(1.3)';
+            button.style.background = '#667eea';
+        }
+
+        // Навигация клавиатурой
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+    </script>
+</body>
+</html>
+
